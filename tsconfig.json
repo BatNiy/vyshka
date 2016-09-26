@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./webApp/dist/",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react"
+  },
+  "include": [
+    "./typings/index.d.ts",
+    "./webApp/src/*"
+  ]
+}
