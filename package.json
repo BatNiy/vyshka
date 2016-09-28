@@ -6,7 +6,10 @@
   "scripts": {
     "test": "node -v && npm --version",
     "npmInstall": "npm install",
-    "run": "webpack"
+    "run": "webpack",
+    "postinstall": "typings install",
+    "devenv": "webpack --colors --watch",
+    "dev-hot": "webpack-dev-server --config webpack-hot.config.js --colors --inline --hot"
   },
   "repository": {
     "type": "git",
@@ -29,8 +32,11 @@
     "webpack": "^1.13.2"
   },
   "devDependencies": {
+    "react-hot-loader": "^3.0.0-beta.5",
+    "require": "^2.4.20",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^0.8.2",
-    "typings": "^1.4.0"
+    "typings": "^1.4.0",
+    "webpack-dev-server": "^1.16.1"
   }
 }
