@@ -1,0 +1,42 @@
+{
+  "name": "webapp",
+  "version": "0.0.1",
+  "description": "client app",
+  "main": "index.js",
+  "scripts": {
+    "test": "node -v && npm --version",
+    "npmInstall": "npm install",
+    "run": "webpack",
+    "postinstall": "typings install",
+    "devenv": "webpack --colors --watch",
+    "dev-hot": "webpack-dev-server --config webpack-hot.config.js --colors --inline --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BatNiy/vyshka.git"
+  },
+  "keywords": [
+    "push"
+  ],
+  "author": "Push.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BatNiy/vyshka/issues"
+  },
+  "homepage": "https://github.com/BatNiy/vyshka#readme",
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "typescript": "^2.0.3",
+    "typings": "^1.4.0",
+    "webpack": "^1.13.2"
+  },
+  "devDependencies": {
+    "react-hot-loader": "^3.0.0-beta.5",
+    "require": "^2.4.20",
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^0.8.2",
+    "typings": "^1.4.0",
+    "webpack-dev-server": "^1.16.1"
+  }
+}

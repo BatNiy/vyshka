@@ -26,10 +26,12 @@ coverage
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
+webApp/dist
 
 # Dependency directories
 node_modules
 jspm_packages
+typings/modules
 
 # Optional npm cache directory
 .npm
@@ -39,3 +41,4 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+.idea/workspace.xml
