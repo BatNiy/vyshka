@@ -27,11 +27,15 @@ coverage
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 webApp/dist
+serverApp/dist
+application
+.tscache
 
 # Dependency directories
 node_modules
 jspm_packages
 typings/modules
+typings/globals
 
 # Optional npm cache directory
 .npm

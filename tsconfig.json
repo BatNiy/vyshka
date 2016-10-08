@@ -4,11 +4,12 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "module": "commonjs",
-    "target": "es5",
+    "target": "es6",
     "jsx": "react"
   },
   "include": [
     "./typings/index.d.ts",
-    "./webApp/src/*"
+    "./webApp/src/*",
+    "./serverApp/src/*"
   ]
 }
