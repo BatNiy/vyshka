@@ -1,12 +1,12 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {Hello} from "./components/Hello";
+import {App} from "./app/app";
 
-var entryDiv = document.createElement("entryDiv");
+var entryDiv = document.createElement("div");
 
 document.body.appendChild(entryDiv);
 
 ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" />,
+    <App/>,
     entryDiv
 );

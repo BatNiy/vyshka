@@ -1,5 +1,7 @@
 var webpack = require("webpack");
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var LessPluginCleanCSS = require('less-plugin-clean-css'),
+    LessPluginAutoPrefix = require('less-plugin-autoprefix');
 
 module.exports = {
     entry: "./webApp/src/index.tsx",
@@ -20,7 +22,9 @@ module.exports = {
     module: {
         loaders: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-            {test: /\.tsx?$/, loader: "ts-loader"}
+            {test: /\.tsx?$/, loader: "ts-loader"},
+            {test: /\.css$/, loader: "style-loader!css-loader"},
+            {test: /\.less$/, loader: "style-loader!css-loader!less-loader"}
         ],
 
         preLoaders: [
@@ -28,9 +32,11 @@ module.exports = {
             {test: /\.js$/, loader: "source-map-loader"}
         ]
     },
-    resolve: {
-        modulesDirectories: ["node_modules"],
-        extensions: ["", ".ts", ".tsx", ".js", ".jsx"]
+    lessLoader: {
+        lessPlugins: [
+            new LessPluginCleanCSS({advanced: true}),
+            new LessPluginAutoPrefix({browsers: ["last 5 versions"]})
+        ]
     },
     // When importing a module whose path matches one of the following, just
     // assume a corresponding global variable exists and use that instead.
