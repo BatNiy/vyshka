@@ -2,7 +2,7 @@
 <project version="4">
   <component name="TypeScriptCompiler">
     <option name="isCompilerEnabled" value="true" />
-    <option name="typeScriptServiceDirectory" value="C:\nodejs\vyshka\node_modules\typescript\lib" />
+    <option name="typeScriptServiceDirectory" value="$PROJECT_DIR$\node_modules\typescript\lib" />
     <option name="generateSourceMap" value="false" />
     <option name="trackFileSystemChanges" value="false" />
     <option name="useConfig" value="true" />
