@@ -1,4 +1,5 @@
 var webpack = require("webpack");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var LessPluginCleanCSS = require('less-plugin-clean-css'),
     LessPluginAutoPrefix = require('less-plugin-autoprefix');
@@ -24,7 +25,11 @@ module.exports = {
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
             {test: /\.tsx?$/, loader: "ts-loader"},
             {test: /\.css$/, loader: "style-loader!css-loader"},
-            {test: /\.less$/, loader: "style-loader!css-loader!less-loader"}
+            {test: /\.less$/, loader: "style-loader!css-loader!less-loader"},
+            {
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                loader: 'url-loader?limit=100000&name=application/public/assecs/[name].[ext]'
+            }
         ],
 
         preLoaders: [
@@ -48,7 +53,8 @@ module.exports = {
     // },
     plugins: [
         new CopyWebpackPlugin([
-            { from: 'webApp/src/html', to: 'application/html' }
-        ])
+            {from: 'webApp/src/html', to: 'application/html'}
+        ]),
+        new ExtractTextPlugin("./application/public/css/[name].css")
     ]
 };
