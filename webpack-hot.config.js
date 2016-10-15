@@ -6,29 +6,20 @@ config.entry = [
     config.entry
 ];
 
-config.module = {
-    loaders: [
-        // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-        {test: /\.tsx?$/, loader: "ts-loader"},
-        // {
-        //     loader: 'react-hot',
-        //     include: [
-        //         path.resolve(__dirname, 'webApp/src/')
-        //     ]
-        // },
-        {loaders: ['react-hot'], include: path.join(__dirname, 'webApp/src/dist/bundle.js') }
-    ],
-
-    preLoaders: [
-        // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-        {test: /\.js$/, loader: "source-map-loader"}
-    ]
-};
+var loaders = [{loaders: ['react-hot-loader/webpack'], include: path.join(__dirname, 'webApp/src') }];
+config.module.loaders =loaders.concat(config.module.loaders) ;
 
 config.devServer = {
     host: '0.0.0.0',
     port: 3000,
-    contentBase: 'webApp'
+    contentBase: 'application/dev_server',
+    proxy: {
+        '/**': {
+            target: 'http://localhost:8080/'
+        }
+    }
 };
+
+config.plugins = config.plugins.slice(1);
 
 module.exports = config;

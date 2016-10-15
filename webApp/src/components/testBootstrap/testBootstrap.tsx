@@ -5,10 +5,6 @@ import {Component} from "react";
 
 export class TestBootstrap extends Component<{}, {}> {
 
-    componentDidMount() {
-        console.log($("body"));
-    }
-
     render() {
         return (
             <Navbar>

@@ -1,14 +1,22 @@
 var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+// var CopyWebpackPlugin = require('copy-webpack-plugin');
 var LessPluginCleanCSS = require('less-plugin-clean-css'),
-    LessPluginAutoPrefix = require('less-plugin-autoprefix');
+    LessPluginAutoPrefix = require('less-plugin-autoprefix'),
+    htmlPl = require("html-webpack-plugin");
+var HtmlPlugin =new htmlPl({
+    filename: '../../html/index.html',
+    template: 'webApp/src/html/index.html',
+    inject: true,
+    hash: false
+});
 
 module.exports = {
     entry: "./webApp/src/index.tsx",
     output: {
-        filename: "./application/public/js/bundle.js",
-        publicPath: "public"
+        filename: "app.js",
+        publicPath: "public/js",
+        path: "application/public/js"
     },
 
     // Enable sourcemaps for debugging webpack's output.
@@ -28,7 +36,7 @@ module.exports = {
             {test: /\.less$/, loader: "style-loader!css-loader!less-loader"},
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-                loader: 'url-loader?limit=100000&name=application/public/assecs/[name].[ext]'
+                loader: 'url-loader?limit=100000&name=../assecs/[name].[ext]'
             }
         ],
 
@@ -43,18 +51,9 @@ module.exports = {
             new LessPluginAutoPrefix({browsers: ["last 5 versions"]})
         ]
     },
-    // When importing a module whose path matches one of the following, just
-    // assume a corresponding global variable exists and use that instead.
-    // This is important because it allows us to avoid bundling all of our
-    // dependencies, which allows browsers to cache those libraries between builds.
-    // externals: {
-    //     "react": "React",
-    //     "react-dom": "ReactDOM"
-    // },
+    htmlWebpackPlugin: HtmlPlugin,
     plugins: [
-        new CopyWebpackPlugin([
-            {from: 'webApp/src/html', to: 'application/html'}
-        ]),
+        HtmlPlugin,
         new ExtractTextPlugin("./application/public/css/[name].css")
     ]
 };
