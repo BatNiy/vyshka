@@ -1,0 +1,40 @@
+@import "../../less/variable";
+
+.activity-panel-wrap {
+  font-size: 16px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: bottom 0.4s ease-out 0.1s;
+  &.hidden-panel{
+    .activity-panel-body{
+      height: 0;
+    }
+  }
+
+  .activity-panel-toggle-btn {
+    margin: auto;
+    width: 15%;
+    min-width: 50px;
+    max-width: 80px;
+    height: @activity-panel-toggle-btn-height;
+    background-color: #e7e7e7;
+    text-align: center;
+    padding: 3px 0;
+    font-size: .7em;
+    border-top: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-rigth: 1px solid #cccccc;
+    border-radius: 7px 7px 0 0;
+    cursor: pointer;
+  }
+  .activity-panel-body {
+    width: 100%;
+    height: @activity-panel-height;
+    background-color: #fafafa;
+    border-top: 1px solid #cccccc;
+    transition: height 0.4s ease-out 0.1s;
+
+  }
+}

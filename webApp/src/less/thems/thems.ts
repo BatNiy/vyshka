@@ -1,4 +1,4 @@
-export type Them = "Yeti" | "Bootstrap"
+export type Them = "Yeti" | "Bootstrap" | "Superhero"
 
 export class ThemsList {
     public static get currentThem(): string {

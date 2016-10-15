@@ -10,7 +10,7 @@ import "bootstrap";
 $(document).ready(function () {
     //your code here
     var entryDiv = document.createElement("div");
-
+    entryDiv.className = "entry-div";
     document.body.appendChild(entryDiv);
 
     ReactDOM.render(
