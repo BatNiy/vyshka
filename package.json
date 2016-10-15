@@ -36,8 +36,10 @@
     "grunt-ts": "^6.0.0-beta.3",
     "grunt-tslint": "^3.2.1",
     "path": "^0.12.7",
+    "pg": "^6.1.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "reflect-metadata": "^0.1.8",
     "tslint": "^3.15.1",
     "typescript": "^2.0.3",
     "typings": "^1.4.0",
@@ -68,6 +70,7 @@
     "style": "0.0.3",
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.2",
+    "typeorm": "0.0.2-alpha.67",
     "typings": "^1.4.0",
     "url-loader": "^0.5.7",
     "webpack-dev-server": "^1.16.1"
