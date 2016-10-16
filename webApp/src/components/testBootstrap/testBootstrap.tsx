@@ -1,4 +1,4 @@
-/// <reference path="../../index.d.ts" />
+/// <reference path="../index.d.ts" />
 import React = require("react");
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap";
 import {Component} from "react";

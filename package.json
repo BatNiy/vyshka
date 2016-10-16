@@ -5,13 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "node -v && npm --version",
-    "npmInstall": "npm install",
-    "run": "webpack",
-    "postinstall": "typings install dt~node --global --save && typings install",
-    "devenv": "webpack --colors --watch",
-    "dev-hot": "webpack-dev-server --config webpack-hot.config.js --colors --inline --hot",
-    "grunt": "grunt --gruntfile ./serverApp/gruntfile.js --base ./",
-    "start": "node ./serverApp/bin/www.js"
+    "npmInstall": "npm install && typings install",
+    "build_web_singl": "webpack",
+    "build_web_watch": "webpack --colors --watch",
+    "build_web_hot": "webpack-dev-server --config webpack-hot.config.js --colors --inline --hot",
+    "build_server_singl": "grunt --gruntfile ./serverApp/gruntfile.js --base ./",
+    "start_server": "node ./serverApp/bin/www.js"
   },
   "repository": {
     "type": "git",

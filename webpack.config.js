@@ -31,7 +31,7 @@ module.exports = {
     module: {
         loaders: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-            {test: /\.tsx?$/, loader: "ts-loader"},
+            {test: /\.tsx?$/, loader: 'ts-loader?configFileName=webApp/tsconfigWebApp.json'},
             {test: /\.css$/, loader: "style-loader!css-loader"},
             {test: /\.less$/, loader: "style-loader!css-loader!less-loader"},
             {
