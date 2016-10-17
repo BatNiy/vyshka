@@ -36,6 +36,7 @@ node_modules
 jspm_packages
 typings/
 !typings/customDefenition
+!typings/index.d.ts
 # Optional npm cache directory
 .npm
 
@@ -45,4 +46,5 @@ typings/
 # Optional REPL history
 .node_repl_history
 !.idea/workspace.xml
+!.idea/typescript-compiler.xml
 .idea

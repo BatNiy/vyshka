@@ -1,3 +1,4 @@
+/// <reference path="../_all.d.ts" />
 import {Table} from "typeorm";
 import {PrimaryColumn, Column} from "typeorm";
 

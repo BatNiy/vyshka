@@ -1,4 +1,4 @@
-/// <reference path="../index.d.ts" />
+/// <reference path="../components/index.d.ts" />
 import "./app.less";
 import "../less/index.less";
 import React = require("react");

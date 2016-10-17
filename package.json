@@ -4,7 +4,9 @@
   "description": "client app",
   "main": "index.js",
   "scripts": {
-    "test": "node -v && npm --version",
+    "test_version": "node -v && npm --version",
+    "clean": "clean.bat",
+    "reInstal_ALL": "reInstal.bat",
     "npmInstall": "npm install && typings install",
     "build_web_singl": "webpack",
     "build_web_watch": "webpack --colors --watch",

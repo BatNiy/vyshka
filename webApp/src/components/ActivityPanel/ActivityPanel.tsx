@@ -1,4 +1,4 @@
-/// <reference path="../../index.d.ts" />
+/// <reference path="../index.d.ts" />
 import React = require("react");
 import {Component} from "react";
 import "./ActivityPanel.less";
