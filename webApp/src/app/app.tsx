@@ -29,7 +29,7 @@ export class App extends Component<{}, {}> {
                 <Header/>
                 <div className="middle">
                     <LeftSidebar/>
-                    <div className="content-wrap">
+                    <div className="content-wrap-app">
 
                     </div>
                     <ActivityPanel/>
