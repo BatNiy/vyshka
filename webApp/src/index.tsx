@@ -5,19 +5,21 @@ import {App} from "./app/app";
 (global as any).jQuery = require('jquery');
 (global as any).$ = require('jquery');
 import "bootstrap";
-import {ThemLoader} from "./app/themLoader";
+import {ThemeLoader} from "./app/themLoader";
 
-
-$(document).ready(function () {
-    //your code here
+$(() => {
     var entryDiv = document.createElement("div");
     entryDiv.id = "entry-div";
     document.body.appendChild(entryDiv);
 
-    ThemLoader.init(entryDiv);
+    ThemeLoader.init(entryDiv);
 
     ReactDOM.render(
         <App/>,
         entryDiv
     );
-});
+})
+// $(document).ready(function () {
+//     //your code here
+//
+// });
