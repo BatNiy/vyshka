@@ -9,6 +9,7 @@ import {Component} from "react";
 import {Header} from "../components/Header/Header";
 import {LeftSidebar} from "../components/LeftSidebar/LeftSidebar";
 import {ActivityPanel} from "../components/ActivityPanel/ActivityPanel";
+import {AppRoute} from "./appRoute";
 
 export class App extends Component<{}, {}> {
     // render() {
@@ -29,9 +30,7 @@ export class App extends Component<{}, {}> {
                 <Header/>
                 <div className="middle">
                     <LeftSidebar/>
-                    <div className="content-wrap-app">
-
-                    </div>
+                    <AppRoute/>
                     <ActivityPanel/>
                 </div>
             </div>
