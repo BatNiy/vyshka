@@ -16,6 +16,7 @@
   },
   "globalDependencies": {
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
-    "openlayers": "registry:dt/openlayers#3.18.2+20161007170240"
+    "openlayers": "registry:dt/openlayers#3.18.2+20161007170240",
+    "react-bootstrap-table": "registry:dt/react-bootstrap-table#2.3.0+20160930122050"
   }
 }
