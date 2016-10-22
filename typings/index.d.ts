@@ -2,6 +2,7 @@
 /// <reference path="customDefenition/app.d.ts" />
 /// <reference path="globals/jquery/index.d.ts" />
 /// <reference path="globals/openlayers/index.d.ts" />
+/// <reference path="globals/react-bootstrap-table/index.d.ts" />
 /// <reference path="modules/bluebird/index.d.ts" />
 /// <reference path="modules/body-parser/index.d.ts" />
 /// <reference path="modules/debug/index.d.ts" />
