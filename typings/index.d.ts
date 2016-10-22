@@ -1,5 +1,6 @@
 /// <reference path="../node_modules/@types/node/index.d.ts" />
 /// <reference path="globals/jquery/index.d.ts" />
+/// <reference path="globals/openlayers/index.d.ts" />
 /// <reference path="modules/bluebird/index.d.ts" />
 /// <reference path="modules/body-parser/index.d.ts" />
 /// <reference path="modules/debug/index.d.ts" />
