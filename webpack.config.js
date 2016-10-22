@@ -37,6 +37,11 @@ module.exports = {
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
                 loader: 'url-loader?limit=100000&name=../assecs/[name].[ext]'
+            },
+            {
+                //отключаем AMD для jsrender, чтобы подключение произошло в виде плагина jquery
+                test: /jsrender.js$/,
+                loader: "imports?define=>false"
             }
         ],
 

@@ -10,13 +10,11 @@ import {Map} from "../components/Map/Map";
 export class AppRoute extends Component<{}, {}> {
     render() {
         return (
-            <div className="content-wrap-app">
-                <Router history={hashHistory}>
-                    <Route path="/" component={Map}/>
-                    <Route path="/object/:uuid" component={ObjectWrap}/>
-                    <Route path="/map" component={Map}/>
-                </Router>
-            </div>
+            <Router history={hashHistory}>
+                <Route path="/" component={Map}/>
+                <Route path="/object/:uuid" component={ObjectWrap}/>
+                <Route path="/map" component={Map}/>
+            </Router>
         );
     }
 }

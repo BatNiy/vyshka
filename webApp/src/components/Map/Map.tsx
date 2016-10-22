@@ -1,8 +1,11 @@
 /// <reference path="../index.d.ts" />
 import React = require("react");
-    import {IBaseVisualComponentProps, BaseVisualComponent} from "../BaseVisualComponent/BaseVisualComponent";
+    import {
+    IBaseVisualComponentProps, BaseVisualComponent,
+        IBaseVisualComponentState
+    } from "../BaseVisualComponent/BaseVisualComponent";
 
-export interface IMapState {
+export interface IMapState extends IBaseVisualComponentState{
 
 }
 
@@ -10,8 +13,7 @@ export interface IMapProps extends IBaseVisualComponentProps {
 }
 
 export class Map extends BaseVisualComponent<IMapProps, IMapState> {
-
-    render() {
+    protected renderComponent(): React.ReactElement<any> {
         return (
             <span>Типо карта</span>
         );

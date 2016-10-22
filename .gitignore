@@ -34,9 +34,8 @@ application
 # Dependency directories
 node_modules
 jspm_packages
-typings/
-!typings/customDefenition
-!typings/index.d.ts
+typings/globals
+typings/modules
 # Optional npm cache directory
 .npm
 
