@@ -3,13 +3,13 @@ import React = require("react");
 import {Component} from "react";
 import "./Header.less";
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap";
-import {ThemLoader, IThemJSON} from "../../app/themLoader";
+import {ThemeLoader, IThemJSON} from "../../app/themLoader";
 export interface IHeaderProps {
 
 }
 
 export interface IHeaderState {
-    thems?: IThemJSON;
+    themes?: IThemJSON;
 }
 
 export class Header extends Component<IHeaderProps, IHeaderState> {
@@ -20,7 +20,7 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
     }
 
     componentDidMount() {
-        ThemLoader.thems().then((thems) => this.setState({thems: thems}));
+        ThemeLoader.themes().then((themes) => this.setState({themes: themes}));
     };
 
     get userIcon() {
@@ -28,7 +28,7 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
     }
 
     render() {
-        const thems = this.state.thems;
+        const themes = this.state.themes;
         return (
             <header>
                 <Navbar>
@@ -40,8 +40,8 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav>
-                            <NavItem eventKey={1} href="#">Link</NavItem>
-                            <NavItem eventKey={2} href="#">Link</NavItem>
+                            <NavItem eventKey={1} href="#/map">Map</NavItem>
+                            <NavItem eventKey={2} href="#/ObjectEditor">object_editor</NavItem>
                             <NavDropdown eventKey={3} title="Dropdown">
                                 <MenuItem eventKey={3.1}>Action</MenuItem>
                                 <MenuItem eventKey={3.2}>Another action</MenuItem>
@@ -51,12 +51,12 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
                             </NavDropdown>
                         </Nav>
                         <Nav pullRight>
-                            {thems ?
+                            {themes ?
                                 <NavDropdown eventKey={"them"} title="Темы">
-                                    {thems.themes.map((them, index) => {
-                                            return <NavItem eventKey={"them" + index.toString()}
-                                                            onSelect={() => ThemLoader.setThem(them)}>
-                                                {them.name}
+                                    {themes.themes.map((theme, index) => {
+                                            return <NavItem eventKey={"theme" + index.toString()} key={index}
+                                                            onSelect={() => ThemeLoader.setTheme(theme)}>
+                                                {theme.name}
                                             </NavItem>;
                                         }
                                     )}

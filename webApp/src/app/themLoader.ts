@@ -8,32 +8,33 @@ export interface IThemItem {
     name: string;
     cssMin: string;
 }
-export class ThemLoader {
-    private static themBox: HTMLBaseElement;
-    private static $ininDiv: JQuery;
+export class ThemeLoader {
+    private static themeBox: HTMLBaseElement;
+    private static $initDiv: JQuery;
     private static themesJSON: Promise<IThemJSON>;
     private static currentThem: string;
 
-    public static init(ininDiv: HTMLDivElement) {
-        this.themBox = document.createElement("link");
-        this.themBox.setAttribute("rel", "stylesheet");
-        this.themBox.setAttribute("href", "https://bootswatch.com/yeti/bootstrap.min.css");
-        document.head.appendChild(this.themBox);
+    public static init(initDiv: HTMLDivElement) {
+        this.themeBox = document.createElement("link");
+        this.themeBox.setAttribute("rel", "stylesheet");
+        this.themeBox.setAttribute("href", "https://bootswatch.com/yeti/bootstrap.min.css");
+        document.head.appendChild(this.themeBox);
         this.currentThem = "Yety";
-        this.$ininDiv = $(ininDiv.id);
-        this.$ininDiv.addClass("Yety");
+        this.$initDiv = $(`#${initDiv.id}`);
+        this.$initDiv.addClass("Yety");
         this.themesJSON = SysApi.getBootsWatch(3).then();
     }
 
-    public static thems(): Promise<IThemJSON> {
+    public static themes(): Promise<IThemJSON> {
         return this.themesJSON;
     }
 
-    public static setThem(them: IThemItem) {
-        this.$ininDiv.removeClass(this.currentThem);
-        this.$ininDiv.addClass(them.name);
-        this.currentThem = them.name;
-        this.themBox.setAttribute("href", them.cssMin);
+    public static setTheme(theme: IThemItem) {
+        // console.log(theme.name);
+        this.$initDiv.removeClass(this.currentThem);
+        this.$initDiv.addClass(theme.name);
+        this.currentThem = theme.name;
+        this.themeBox.setAttribute("href", theme.cssMin);
     }
 
 }
