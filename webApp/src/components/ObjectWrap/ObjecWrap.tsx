@@ -51,7 +51,7 @@ export class ObjectWrap extends BaseVisualComponent<IObjecWrapProps, IObjecWrapS
             type: {
                 vana: {
                     baseType: "string",
-                    value: ["Ваня"]
+                    value: ["Ваня"],
                 },
                 niaz: {
                     baseType: "string",
@@ -73,6 +73,11 @@ export class ObjectWrap extends BaseVisualComponent<IObjecWrapProps, IObjecWrapS
                     baseType: "VisualComponent",
                     jsIdent: "TestAttr",
                     value: [attr]
+                },
+                NashPerviAtriboot2: {
+                    baseType: "VisualComponent",
+                    jsIdent: "TestAttr",
+                    value: [attr]
                 }
             }
         };
@@ -85,7 +90,8 @@ export class ObjectWrap extends BaseVisualComponent<IObjecWrapProps, IObjecWrapS
                 cols: {
                     baseType: "VisualComponent",
                     jsIdent: "ColControl",
-                    value: [col6, col6]
+                    value: [col6, col6],
+                    multi: true
                 }
             },
         };
@@ -98,7 +104,8 @@ export class ObjectWrap extends BaseVisualComponent<IObjecWrapProps, IObjecWrapS
                 Row: {
                     baseType: "VisualComponent",
                     jsIdent: "RowControl",
-                    value: [dataRow, dataRow]
+                    value: [dataRow, dataRow],
+                    multi: true
                 }
             },
         };

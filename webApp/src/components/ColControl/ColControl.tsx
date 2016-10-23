@@ -35,7 +35,7 @@ export class ColControl extends BaseVisualComponent<IColControlProps, IColContro
     }
 
     get width() {
-        return this.state.dataTransfer.value("width", true);
+        return this.state.dataTransfer.value("width");
     }
 
     get visualComponents() {

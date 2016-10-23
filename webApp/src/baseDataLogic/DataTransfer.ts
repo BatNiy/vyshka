@@ -33,6 +33,7 @@ export interface ITypeInfo {
     jsIdent?: string;
     baseType: BaseTypesIdents;
     value: Array<BaseTypes>;
+    multi?: boolean;
 }
 
 export class DataTransfer implements IDataSever {
@@ -64,7 +65,8 @@ export class DataTransfer implements IDataSever {
                         let tempType: ITypeInfo = {
                             value: [val],
                             baseType: type.baseType,
-                            jsIdent: type.jsIdent
+                            jsIdent: type.jsIdent,
+                            multi: false
                         };
                         out.push(tempType);
                     });
@@ -90,12 +92,15 @@ export class DataTransfer implements IDataSever {
         return out;
     }
 
-    public value(ident: string, asNotArray?: boolean): Array<BaseTypes> | BaseTypes {
-        if (asNotArray) {
+    public value(ident: string, asArray?: boolean): Array<BaseTypes> | BaseTypes {
+        if (asArray) {
+            return this.type[ident].value;
+        }
+        if (this.type[ident].multi) {
+            return this.type[ident].value;
+        } else {
             return this.type[ident].value[0];
         }
-
-        return this.type[ident].value;
     }
 
     get ord() {
@@ -103,7 +108,7 @@ export class DataTransfer implements IDataSever {
     }
 
     public static getOrd(elem: IDataFromServer): number {
-        return elem.type["ord"].value[0] as number || 0;
+        return elem.type["ord"] && elem.type["ord"].value[0] as number || 0;
     }
 }
 
