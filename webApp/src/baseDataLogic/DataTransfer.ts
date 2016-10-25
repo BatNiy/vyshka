@@ -46,8 +46,8 @@ export class DataTransfer implements IDataSever {
     delete: boolean;
     uuid: string;
 
-    constructor(date: IDataFromServer) {
-        $.map(date, (value, ident) => {
+    constructor(data: IDataFromServer) {
+        $.map(data, (value, ident) => {
             this[ident] = value;
         });
     }

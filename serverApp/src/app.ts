@@ -1,10 +1,10 @@
 /// <reference path="../../typings/index.d.ts" />
 import * as bodyParser from "body-parser";
 import * as express from "express";
-import * as path from "path";
-// let path = require("path");
+let path = require("path");
 
 import * as indexRoute from "./routes/index";
+// import ObjectService from "./Services/ObjectServices";
 
 /**
  * The server.
@@ -65,14 +65,14 @@ class Server {
         this.app.use(bodyParser.json());
 
         //mount query string parser
-        this.app.use(bodyParser.urlencoded({ extended: true }));
+        this.app.use(bodyParser.urlencoded({extended: true}));
 
         //add static paths
         this.app.use(express.static(path.join(__dirname)));
         this.app.use(express.static(path.join(__dirname, "bower_components")));
 
         // catch 404 and forward to error handler
-        this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
+        this.app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
             var error = new Error("Not Found");
             err.status = 404;
             next(err);
@@ -94,8 +94,17 @@ class Server {
         //create routes
         var index: indexRoute.Index = new indexRoute.Index();
 
+        // let createService: ObjectService = new ObjectService.ObjectService();
+
+
         //home page
-        router.get("/", index.index.bind(index.index));
+        // router.get("/", index.index.bind(index.index));
+        // router.get("/ko", index.index.bind(index.index));
+        router.get("/", (req: express.Request, res: express.Response) => {
+            res.send("hello");
+        });
+
+        // router.get("/kurva", createService.);
 
         //use router middleware
         this.app.use(router);
