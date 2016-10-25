@@ -49,13 +49,9 @@ export class ObjectWrap extends BaseVisualComponent<IObjecWrapProps, IObjecWrapS
             uuid: uuid + "drugoiCol",
             readOnly: false,
             type: {
-                vana: {
+                value: {
                     baseType: "string",
                     value: ["Ваня"],
-                },
-                niaz: {
-                    baseType: "string",
-                    value: ["Нияз"]
                 }
             }
         };
@@ -71,12 +67,12 @@ export class ObjectWrap extends BaseVisualComponent<IObjecWrapProps, IObjecWrapS
                 },
                 NashPerviAtriboot: {
                     baseType: "VisualComponent",
-                    jsIdent: "TestAttr",
+                    jsIdent: "TextControl",
                     value: [attr]
                 },
                 NashPerviAtriboot2: {
                     baseType: "VisualComponent",
-                    jsIdent: "TestAttr",
+                    jsIdent: "TextControl",
                     value: [attr]
                 }
             }

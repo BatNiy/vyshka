@@ -23,10 +23,10 @@ export class ColControl extends BaseVisualComponent<IColControlProps, IColContro
         let children = this.visualComponents;
         return (
             <Col md={colWidth} xs={12} className="col-control">
-                {children.map((child) => {
+                {children.map((child, key) => {
                     let Control = DataTransfer.getCommponent(child.jsIdent);
                     return (
-                        <Control data={child.value[0]}/>
+                        <Control data={child.value[0]} key={key}/>
                     );
                 })
                 }

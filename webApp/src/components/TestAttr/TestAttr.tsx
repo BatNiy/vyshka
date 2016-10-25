@@ -17,7 +17,7 @@ export class TestAttr extends BaseVisualComponent<ITestAttrProps, ITestAttrState
     protected renderComponent() {
         return (
             <div>
-                <span>Хуй разбеетесь,</span> <span>{this.getVal("vana")},{this.getVal("niaz")}!!!!</span>
+                <span>Не разбеетесь,</span> <span>{this.getVal("vana")},{this.getVal("niaz")}!!!!</span>
             </div>
         );
     }

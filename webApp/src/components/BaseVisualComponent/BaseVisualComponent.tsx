@@ -39,4 +39,13 @@ export abstract class BaseVisualComponent<P extends IBaseVisualComponentProps, S
     getVal(ident: string, notArr?: boolean) {
         return this.state.dataTransfer.value(ident, notArr);
     }
+
+    protected set(ident: string, value: any[]) {
+        let DT = this.state.dataTransfer.set(ident, value);
+        this.setState({dataTransfer: DT} as any); //Хуйня какая то в TS с generic
+    }
+
+    protected get fromServer(): DataTransfer {
+        return this.state.dataTransfer;
+    }
 }

@@ -103,6 +103,11 @@ export class DataTransfer implements IDataSever {
         }
     }
 
+    public set(idnet: string, value: Array<any>) {
+        this.type[idnet].value = value;
+        return this;
+    };
+
     get ord() {
         return this.value("ord", true);
     }
