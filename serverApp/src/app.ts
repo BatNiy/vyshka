@@ -2,9 +2,11 @@
 import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as path from "path";
-// let path = require("path");
 
 import * as indexRoute from "./routes/index";
+import {ObjectService} from "./Services/ObjectServices";
+
+import  "reflect-metadata";
 
 /**
  * The server.
@@ -65,14 +67,14 @@ class Server {
         this.app.use(bodyParser.json());
 
         //mount query string parser
-        this.app.use(bodyParser.urlencoded({ extended: true }));
+        this.app.use(bodyParser.urlencoded({extended: true}));
 
         //add static paths
         this.app.use(express.static(path.join(__dirname)));
         this.app.use(express.static(path.join(__dirname, "bower_components")));
 
         // catch 404 and forward to error handler
-        this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
+        this.app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
             var error = new Error("Not Found");
             err.status = 404;
             next(err);
@@ -96,6 +98,9 @@ class Server {
 
         //home page
         router.get("/", index.index.bind(index.index));
+
+        let os = new ObjectService();
+        router.get("/kurva", os.createObject.bind(os));
 
         //use router middleware
         this.app.use(router);

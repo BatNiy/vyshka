@@ -1,4 +1,4 @@
-
+///<reference path="../../node_modules/reflect-metadata/reflect-metadata.d.ts"/>"
 /// <reference path="../../typings/globals/jquery/index.d.ts" />
 /// <reference path="../../typings/modules/body-parser/index.d.ts" />
 /// <reference path="../../typings/modules/debug/index.d.ts" />
