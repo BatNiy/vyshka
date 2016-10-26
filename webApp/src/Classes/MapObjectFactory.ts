@@ -1,4 +1,7 @@
-import ol = require("openlayers");
+/// <reference path="../components/index.d.ts" />
+
+// import ol = require("openlayers");
+import {geom, Map, Feature, style, Coordinate} from "openlayers";
 // import Map from "../components/Map/Map.tsx";
 import {IMapObject} from "../components/Map/Map";
 // import "../img/location-icon.png";
@@ -8,11 +11,11 @@ export interface IMapObjectFactory {
     // getStyle
 }
 export class MapObjectFactory implements IMapObjectFactory {
-    private _olMap: ol.Map;
+    private _olMap: Map;
     private _singleObjIconImgUrl = require('../img/location-icon.png');
     private _groupObjIconImgUrl = require('../img/location-icon-group.png');
 
-    constructor(map: ol.Map) {
+    constructor(map: Map) {
         if (!map) {
             return;
         }
@@ -20,10 +23,10 @@ export class MapObjectFactory implements IMapObjectFactory {
         this._olMap = map;
     }
 
-    public createVisualObject(objData: IMapObject): ol.Feature {
+    public createVisualObject(objData: IMapObject): Feature {
         var e = 4500000;
 
-        let location = [2 * e * Math.random() - e, 2 * e * Math.random() - e];
+        let location: Coordinate = [2 * e * Math.random() - e, 2 * e * Math.random() - e];
 
         // let location = ol.proj.fromLonLat([
         //     objData.location[1],
@@ -38,16 +41,16 @@ export class MapObjectFactory implements IMapObjectFactory {
         return iconFeature;
     }
 
-    private _createIconFeature(location: [number, number]): ol.Feature {
-        return new ol.Feature({
-            geometry: new ol.geom.Point(location)
+    private _createIconFeature(location: Coordinate): Feature {
+        return new Feature({
+            geometry: new geom.Point(location)
         });
     }
 
-    private _createSingleIconStyle(/* params ?*/): Array<ol.style.Style> {
+    private _createSingleIconStyle(/* params ?*/): Array<style.Style> {
         return [
-            new ol.style.Style({
-                image: new ol.style.Icon({
+            new style.Style({
+                image: new style.Icon({
                     anchor: [0.5, 1],
                     anchorXUnits: 'fraction',
                     anchorYUnits: 'fraction',
@@ -59,7 +62,7 @@ export class MapObjectFactory implements IMapObjectFactory {
         ];
     }
 
-    public iconStyleFunc(feature: ol.Feature) {
+    public iconStyleFunc(feature: Feature) {
 
         // let features = feature.get('features');
         // var size = features.length;
@@ -91,10 +94,10 @@ export class MapObjectFactory implements IMapObjectFactory {
         return style;
     }
 
-    private _createGroupIconStyle(size: number): Array<ol.style.Style> {
+    private _createGroupIconStyle(size: number): Array<style.Style> {
         return [
-            new ol.style.Style({
-                image: new ol.style.Icon({
+            new style.Style({
+                image: new style.Icon({
                     anchor: [0.5, 0.65],
                     anchorXUnits: 'fraction',
                     anchorYUnits: 'fraction',
@@ -102,11 +105,11 @@ export class MapObjectFactory implements IMapObjectFactory {
                     scale: 1,
                     src: this._groupObjIconImgUrl
                 }),
-                text: new ol.style.Text({
+                text: new style.Text({
                     font: "25px Glyphicons Halflings",
                     text: "\ue064",
                     textAlign: 'center',
-                    fill: new ol.style.Fill({
+                    fill: new style.Fill({
                         color: '#000'
                     }),
                     offsetX: 0,
