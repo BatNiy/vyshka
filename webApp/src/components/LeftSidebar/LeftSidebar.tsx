@@ -1,5 +1,6 @@
 /// <reference path="../index.d.ts" />
 import React = require("react");
+import PubSub = require("pubsub-js");
 import {Component} from "react";
 import "./LeftSideBar.less";
 
@@ -22,6 +23,10 @@ export class LeftSidebar extends Component<ILeftSidebarProps, ILeftSidebarState>
 
     toggleBtn() {
         this.setState({hidden: !this.state.hidden});
+        setTimeout(() => {
+            PubSub.publish('sidebar.toggle');
+        }, 450);
+
     };
 
     render() {

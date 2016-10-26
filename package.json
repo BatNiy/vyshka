@@ -39,6 +39,7 @@
     "openlayers": "^3.18.2",
     "path": "^0.12.7",
     "pg": "^6.1.0",
+    "pubsub-js": "^1.5.4",
     "react": "^15.3.2",
     "react-bootstrap-table": "^2.5.5",
     "react-dom": "^15.3.2",

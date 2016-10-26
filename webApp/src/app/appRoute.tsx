@@ -7,6 +7,7 @@ import {Router, Route, hashHistory} from "react-router";
 import {ObjectWrap} from "../components/ObjectWrap/ObjecWrap";
 import {Map} from "../components/Map/Map";
 import {LoginModal} from "../components/LoginModal/LoginModal";
+import {ObjectEditor} from "../components/ObjectEditor/ObjectEditor";
 
 export class AppRoute extends Component<{}, {}> {
     render() {
@@ -17,6 +18,7 @@ export class AppRoute extends Component<{}, {}> {
                     <Route path="/object/:uuid" component={ObjectWrap}/>
                     <Route path="/map" component={Map}/>
                     <Route path="/login" component={LoginModal}/>
+                    <Route path="/objectEditor" component={ObjectEditor}/>
                 </Router>
             </div>
         );
