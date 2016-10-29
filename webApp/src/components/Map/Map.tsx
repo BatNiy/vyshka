@@ -8,6 +8,7 @@ import {
 } from "../BaseVisualComponent/BaseVisualComponent";
 import ol = require("openlayers");
 import {MapObjectFactory} from "../../Classes/MapObjectFactory";
+import {Generator} from "../../baseDataLogic/RandomGenerator";
 
 export interface IMapProps extends IBaseVisualComponentProps {
 }
@@ -31,12 +32,17 @@ export interface IMapObject {
 }
 
 export class Map extends BaseVisualComponent<IMapProps, IMapState> {
+    protected renderComponent(): React.ReactElement<any> {
+        return <span/>;
+    }
+
     private _olMap: ol.Map;
     private _iconFeatureSource: ol.source.Vector;
     private _clusterLayer: ol.layer.Vector;
     // private _dataSource: Array<IMapObject>;
     private _objectFactory: MapObjectFactory;
     private _iconLayer: ol.layer.Vector;
+    private _id: string = "map" + Generator.ShortId();
 
     constructor(props: IMapProps) {
         super(props);
@@ -91,7 +97,7 @@ export class Map extends BaseVisualComponent<IMapProps, IMapState> {
             style: this._objectFactory.iconStyleFunc.bind(this._objectFactory)
         });
         this._olMap = new ol.Map({
-            target: 'openlayersMap',
+            target: this._id,
             view: view,
             layers: [baseLayer, this._clusterLayer]
         });
@@ -134,9 +140,11 @@ export class Map extends BaseVisualComponent<IMapProps, IMapState> {
         this.state.objectsData = dataSource;
     }
 
-    protected renderComponent(): React.ReactElement<any> {
+    render(): React.ReactElement<any> {
         return (
-            <div id="openlayersMap"></div>
+            <div className="content-map">
+                <div id={this._id} className="openlayersMap"/>
+            </div>
         );
     }
 }

@@ -30,7 +30,9 @@ export class App extends Component<{}, {}> {
                 <Header/>
                 <div className="middle">
                     <LeftSidebar/>
-                    <AppRoute/>
+                    <div className="content-wrap-app">
+                        <AppRoute/>
+                    </div>
                     <ActivityPanel/>
                 </div>
             </div>

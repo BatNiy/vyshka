@@ -4,7 +4,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var LessPluginCleanCSS = require('less-plugin-clean-css'),
     LessPluginAutoPrefix = require('less-plugin-autoprefix'),
     htmlPl = require("html-webpack-plugin");
-var HtmlPlugin =new htmlPl({
+var HtmlPlugin = new htmlPl({
     filename: '../../html/index.html',
     template: 'webApp/src/html/index.html',
     inject: true,
@@ -18,7 +18,6 @@ module.exports = {
         publicPath: "public/js",
         path: "application/public/js"
     },
-
     // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
 
