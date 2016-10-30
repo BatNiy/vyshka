@@ -3,6 +3,7 @@ import React = require("react");
 import {Component} from "react";
 import "./Header.less";
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap";
+import {AutoAffix} from "react-overlays";
 import {ThemeLoader, IThemJSON} from "../../app/themLoader";
 export interface IHeaderProps {
 
@@ -31,7 +32,7 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
         const themes = this.state.themes;
         return (
             <header>
-                <Navbar>
+                <Navbar fixedTop={true} fluid={true}>
                     <Navbar.Header>
                         <Navbar.Brand>
                             <a href="#">SomTrack</a>
@@ -42,13 +43,6 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
                         <Nav>
                             <NavItem eventKey={1} href="#/map">Map</NavItem>
                             <NavItem eventKey={2} href="#/ObjectEditor">object_editor</NavItem>
-                            <NavDropdown eventKey={3} title="Dropdown">
-                                <MenuItem eventKey={3.1}>Action</MenuItem>
-                                <MenuItem eventKey={3.2}>Another action</MenuItem>
-                                <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                                <MenuItem divider/>
-                                <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                            </NavDropdown>
                         </Nav>
                         <Nav pullRight>
                             {themes ?
@@ -76,3 +70,11 @@ export class Header extends Component<IHeaderProps, IHeaderState> {
         );
     }
 }
+
+//<NavDropdown eventKey={3} title="Dropdown">
+//    <MenuItem eventKey={3.1}>Action</MenuItem>
+//   <MenuItem eventKey={3.2}>Another action</MenuItem>
+//    <MenuItem eventKey={3.3}>Something else here</MenuItem>
+//    <MenuItem divider/>
+//    <MenuItem eventKey={3.3}>Separated link</MenuItem>
+//</NavDropdown>

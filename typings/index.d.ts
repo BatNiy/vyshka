@@ -13,4 +13,4 @@
 /// <reference path="modules/react-router/index.d.ts" />
 /// <reference path="modules/react/index.d.ts" />
 /// <reference path="modules/serve-static/index.d.ts" />
-/// <reference path="customDefenition/pubsub-js.d.ts" />
+

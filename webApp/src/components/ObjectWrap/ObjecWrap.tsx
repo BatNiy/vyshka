@@ -6,6 +6,9 @@ import {
     BaseVisualComponent, IBaseVisualComponentProps,
     IBaseVisualComponentState
 } from "../BaseVisualComponent/BaseVisualComponent";
+import PubSub = require('pubsub-js');
+import {IActonList} from "../LeftSidebar/LeftSidebar";
+
 
 export interface IObjecWrapState extends IBaseVisualComponentState {
 }
@@ -34,12 +37,38 @@ export class ObjectWrap extends BaseVisualComponent<IObjecWrapProps, IObjecWrapS
     }
 
     componentDidMount() {
-        this.loadData(this.props.params.uuid);
+        if (this.rootMod) {
+            this.loadData(this.props.params.uuid);
+            PubSub.publish<IActonList>("sidebar.addBtnList", this.actionList);
+        }
     }
 
-    // get rows() {
-    //     // return this.state.dataTransfer;
-    // }
+    componentWillUnmount() {
+        if (this.rootMod) {
+            PubSub.publish<string>("sidebar.deleteBtnList", this.actionList.uuid);
+        }
+    }
+
+    get actionList(): IActonList {
+        return {
+            uuid: "objWrapList" + this.objectUuid,
+            renderList: [<span className="btn-element-control glyphicon glyphicon-floppy-saved"
+                               onClick={() => this.saveObject()}/>
+            ]
+        };
+    }
+
+    get objectUuid() {
+        if (this.rootMod) {
+            return this.props.params.uuid;
+        } else {
+            return this.state.dataTransfer.uuid;
+        }
+    }
+
+    saveObject() {
+        console.log("типо сохранил");
+    }
 
     loadData(uuid: string) {
         console.log("Типо загрузил объект " + uuid);

@@ -10,19 +10,25 @@
   border-right: 1px solid #cecece;
   padding-right: 35px;
   transition: width 0.4s ease-out 0.1s;
-  &.sidebar-hidden{
+  &.sidebar-hidden {
     width: 35px;
   }
   .sidebar-search-box {
     width: 100%;
   }
-  .sidebar-toggle-btn {
+  .sidebar-btn-list {
     position: absolute;
     right: 5px;
     top: 5px;
     width: @sidebar-toggle-btn-size;
-    height: @sidebar-toggle-btn-size + 10;
-    font-size: @sidebar-toggle-btn-size;
-    cursor: pointer;
+    //height: @sidebar-toggle-btn-size + 10;
+    //font-size: @sidebar-toggle-btn-size;
+    //cursor: pointer;
+    .btn-element-control {
+      width: @sidebar-toggle-btn-size;
+      height: @sidebar-toggle-btn-size + 10;
+      font-size: @sidebar-toggle-btn-size;
+      cursor: pointer;
+    }
   }
 }
