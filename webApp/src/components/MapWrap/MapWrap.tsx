@@ -21,7 +21,7 @@ export class MapWrap extends BaseVisualComponent<ITestAttrProps, ITestAttrState>
         return (
             <div className="map-wrap">
                 <label>{this.DT.value('name')}</label>
-                <Map dats ={this.DT.getGroup("dats")}/>
+                <Map dots ={this.DT.getGroup("dots")}/>
             </div>
         );
     }

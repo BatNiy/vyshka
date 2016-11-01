@@ -9,8 +9,10 @@ import {
 import ol = require("openlayers");
 import {MapObjectFactory} from "../../Classes/MapObjectFactory";
 import {Generator} from "../../baseDataLogic/RandomGenerator";
+import {DataTransfer} from "../../baseDataLogic/DataTransfer";
 
 export interface IMapProps extends IBaseVisualComponentProps {
+    dots: Array<DataTransfer>;
 }
 
 export interface IMapState extends IBaseVisualComponentState {
@@ -35,7 +37,6 @@ export class Map extends BaseVisualComponent<IMapProps, IMapState> {
     protected renderComponent(): React.ReactElement<any> {
         return <span/>;
     }
-
     private _olMap: ol.Map;
     private _iconFeatureSource: ol.source.Vector;
     private _clusterLayer: ol.layer.Vector;
@@ -46,17 +47,17 @@ export class Map extends BaseVisualComponent<IMapProps, IMapState> {
 
     constructor(props: IMapProps) {
         super(props);
-        let wellDataJsonStr = '[{"id":"580fcf53692c9597ee785548","name":"Tracy","isActive":false,"picture":"http://placehold.it/32x32","location":["-57.03374","-115.192059"]},' +
-            '{"id":"580fcf53598ff8454356f1fb","name":"Audrey","isActive":false,' +
-            '"picture":"http://placehold.it/32x32","location":["-77.603294","-173.364724"]},{"id":"580fcf53843a9d0c54ae31fe","name":"Janine","isActive":false,"picture":"http://placehold.it/32x32","location":["20.34541","173.356255"]},' +
-            '{"id":"580fcf53cc535be8314ab202","name":"Schneider","isActive":false,"picture":"http://placehold.it/32x32","location":["64.685276","1.127349"]},' +
-            '{"id":"580fcf53e7e9826282f81554","name":"Alvarado","isActive":true,"picture":"http://placehold.it/32x32","location":["-48.261993","-16.443236"]},' +
-            '{"id":"580fcf53c5ecbcd1fd1e656a","name":"Dona","isActive":false,"picture":"http://placehold.it/32x32","location":["37.88547","-61.052585"]},' +
-            '{"id":"580fcf539404fb6e8ac53ffd","name":"Reed","isActive":true,"picture":"http://placehold.it/32x32","location":["0.842813","-109.21296"]}]';
-
-        this.state = {
-            objectsData: JSON.parse(wellDataJsonStr)
-        };
+        // let wellDataJsonStr = '[{"id":"580fcf53692c9597ee785548","name":"Tracy","isActive":false,"picture":"http://placehold.it/32x32","location":["-57.03374","-115.192059"]},' +
+        //     '{"id":"580fcf53598ff8454356f1fb","name":"Audrey","isActive":false,' +
+        //     '"picture":"http://placehold.it/32x32","location":["-77.603294","-173.364724"]},{"id":"580fcf53843a9d0c54ae31fe","name":"Janine","isActive":false,"picture":"http://placehold.it/32x32","location":["20.34541","173.356255"]},' +
+        //     '{"id":"580fcf53cc535be8314ab202","name":"Schneider","isActive":false,"picture":"http://placehold.it/32x32","location":["64.685276","1.127349"]},' +
+        //     '{"id":"580fcf53e7e9826282f81554","name":"Alvarado","isActive":true,"picture":"http://placehold.it/32x32","location":["-48.261993","-16.443236"]},' +
+        //     '{"id":"580fcf53c5ecbcd1fd1e656a","name":"Dona","isActive":false,"picture":"http://placehold.it/32x32","location":["37.88547","-61.052585"]},' +
+        //     '{"id":"580fcf539404fb6e8ac53ffd","name":"Reed","isActive":true,"picture":"http://placehold.it/32x32","location":["0.842813","-109.21296"]}]';
+        //
+        // this.state = {
+        //     objectsData: JSON.parse(wellDataJsonStr)
+        // };
 
     }
 
@@ -66,12 +67,12 @@ export class Map extends BaseVisualComponent<IMapProps, IMapState> {
 
     componentDidMount() {
         this._initMap();
-        var wellIds = [];
+        // var wellIds = [];
 
-        for (var t of this.state.objectsData) {
-            wellIds.push(t.id);
-        }
-        this.showObject(wellIds);
+        // for (var t of this.state.objectsData) {
+        //     wellIds.push(t.id);
+        // }
+        this.showObjects();
         PubSub.subscribe('sidebar.toggle', () => {
             this._olMap.updateSize();
         });
@@ -106,6 +107,24 @@ export class Map extends BaseVisualComponent<IMapProps, IMapState> {
     private _setObj(obj: ol.Feature) {
         this._iconFeatureSource.addFeature(obj);
         // this._iconLayer.getSource().addFeature(obj);
+    }
+
+    public showObjects() {
+        let dots = this.props.dots || [];
+        for (var dot of dots) {
+            let objProps: IMapObject = {
+                id: dot.uuid,
+                location: [
+                    (parseFloat(dot.value('lon').toString()) || 0),
+                    (parseFloat(dot.value('lat').toString()) || 0)
+                ],
+                name: "untitled",
+                picture: "",
+                isActive: false
+            };
+            var objFeature = this._objectFactory.createVisualObject(objProps);
+            this._setObj(objFeature);
+        }
     }
 
     public showObject(objectIds: Array<number>) {

@@ -6,6 +6,7 @@ import {geom, Map, Feature, style, Coordinate} from "openlayers";
 import {IMapObject} from "../components/Map/Map";
 // import "../img/location-icon.png";
 // import "../img/location-group.png";
+import ol = require("openlayers");
 
 export interface IMapObjectFactory {
     // getStyle
@@ -24,16 +25,14 @@ export class MapObjectFactory implements IMapObjectFactory {
     }
 
     public createVisualObject(objData: IMapObject): Feature {
-        var e = 4500000;
+        // var e = 4500000;
+        // let location: Coordinate = [2 * e * Math.random() - e, 2 * e * Math.random() - e];
 
-        let location: Coordinate = [2 * e * Math.random() - e, 2 * e * Math.random() - e];
+        let location = ol.proj.fromLonLat([
+            objData.location[0],
+            objData.location[1]
+        ]);
 
-        // let location = ol.proj.fromLonLat([
-        //     objData.location[1],
-        //     objData.location[0]
-        // ]);
-
-        // console.log(location);
         let iconFeature = this._createIconFeature(location);
         iconFeature.setId(objData.id);
         iconFeature.set('iconUrl', objData.picture);

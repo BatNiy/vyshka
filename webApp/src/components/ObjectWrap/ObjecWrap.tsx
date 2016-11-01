@@ -84,10 +84,11 @@ export class ObjectWrap extends BaseVisualComponent<IObjecWrapProps, IObjecWrapS
             if (!dataTr.readOnly) {
                 PubSub.publish<IActonList>("sidebar.addBtnList", this.actionList);
             }
-        }).catch(() => {
-            console.log("yt yfqlty");
+        }).catch((e: Error) => {
+            console.error(e);
             Notificator.error("бъект не найден");
             this.setState({dataTransfer: true as any, showFalse: true});
+            // throw new Error(e.message);
         });
     }
 

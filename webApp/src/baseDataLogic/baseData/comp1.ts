@@ -207,7 +207,7 @@ let col3_1: IDataFromServer = {
                                 }
                             }
                         },
-                        group: "dats"
+                        group: "dots"
                     },
                     dat2: {
                         baseType: 'VisualComponent',
@@ -226,7 +226,7 @@ let col3_1: IDataFromServer = {
                                 }
                             }
                         },
-                        group: "dats"
+                        group: "dots"
                     }
                 }
             },
