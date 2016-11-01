@@ -176,7 +176,7 @@ let col3: IDataFromServer = {
     type: {
         width: {
             baseType: "int",
-            value: 12
+            value: 6
         },
         attrMap: {
             baseType: "VisualComponent",
@@ -185,7 +185,12 @@ let col3: IDataFromServer = {
                 typeIdent: "AttrMap",
                 uuid: Generator.UUID(),
                 readOnly: false,
-                type: {}
+                type: {
+                    name: {
+                        baseType: 'string',
+                        value: "Местонахождение"
+                    }
+                }
             },
             group: "attrs"
         }

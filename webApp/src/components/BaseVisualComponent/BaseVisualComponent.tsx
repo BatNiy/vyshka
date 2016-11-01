@@ -41,7 +41,7 @@ export abstract class BaseVisualComponent<P extends IBaseVisualComponentProps, S
     }
 
     getVal(ident: string) {
-        return this.state.dataTransfer.value(ident);
+        return this.DT.value(ident);
     }
 
     protected set(ident: string, value: BaseTypesUnpaced) {

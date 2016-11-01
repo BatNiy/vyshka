@@ -33,7 +33,7 @@ export class MapObjectFactory implements IMapObjectFactory {
         //     objData.location[0]
         // ]);
 
-        console.log(location);
+        // console.log(location);
         let iconFeature = this._createIconFeature(location);
         iconFeature.setId(objData.id);
         iconFeature.set('iconUrl', objData.picture);

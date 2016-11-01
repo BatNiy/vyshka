@@ -1,4 +1,5 @@
 /// <reference path="../index.d.ts" />
+import "./MapWrap.less";
 import React = require("react");
 import {
     IBaseVisualComponentProps, BaseVisualComponent,
@@ -18,7 +19,8 @@ export class MapWrap extends BaseVisualComponent<ITestAttrProps, ITestAttrState>
 
     protected renderComponent() {
         return (
-            <div style={{height: 300, width: "100%"}}>
+            <div className="map-wrap">
+                <label>{this.DT.value('name')}</label>
                 <Map/>
             </div>
         );
