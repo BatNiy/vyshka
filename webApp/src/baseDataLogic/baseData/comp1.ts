@@ -190,13 +190,43 @@ let col3_1: IDataFromServer = {
                         baseType: 'string',
                         value: "Местонахождение"
                     },
-                    lat: {
-                        baseType: "float",
-                        value: 55.7522200
+                    dat1: {
+                        baseType: 'VisualComponent',
+                        value: {
+                            jsIdent: 'SingleMapDotView',
+                            typeIdent: "dot",
+                            uuid: Generator.UUID(),
+                            type: {
+                                lat: {
+                                    baseType: "float",
+                                    value: 55.7522200
+                                },
+                                lon: {
+                                    baseType: "float",
+                                    value: 37.6155600
+                                }
+                            }
+                        },
+                        group: "dats"
                     },
-                    lon: {
-                        baseType: "float",
-                        value: 37.6155600
+                    dat2: {
+                        baseType: 'VisualComponent',
+                        value: {
+                            jsIdent: 'SingleMapDotView',
+                            typeIdent: "dot",
+                            uuid: Generator.UUID(),
+                            type: {
+                                lat: {
+                                    baseType: "float",
+                                    value: 51.7522200
+                                },
+                                lon: {
+                                    baseType: "float",
+                                    value: 37.6155600
+                                }
+                            }
+                        },
+                        group: "dats"
                     }
                 }
             },
@@ -219,7 +249,7 @@ let dataRow3: IDataFromServer = {
     },
 };
 
-export let data1 : IDataFromServer = {
+export let data1: IDataFromServer = {
     typeIdent: "baseType",
     uuid: "1",
     readOnly: false,
