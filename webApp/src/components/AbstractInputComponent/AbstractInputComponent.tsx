@@ -2,7 +2,6 @@
 import React = require("react");
 import {FormGroup, InputGroup, FormControl} from "react-bootstrap";
 // let ControlLabel = require("~");
-import {IDataFromServer, DataTransfer} from "../../baseDataLogic/DataTransfer";
 import {
     BaseVisualComponent, IBaseVisualComponentProps,
     IBaseVisualComponentState
@@ -48,11 +47,11 @@ export abstract class AbstractInputComponent<P extends IAbstractInputComponentPr
 
     protected handleChange(event: Event) {
         let value = (event.target as HTMLInputElement).value;
-        this.set(this.valueIdent(), [value]);
+        this.set(this.valueIdent(), value);
     };
 
     protected value() {
-        return this.fromServer.value(this.valueIdent());
+        return this.DT.value(this.valueIdent());
     }
 
     protected size(): bsSize {

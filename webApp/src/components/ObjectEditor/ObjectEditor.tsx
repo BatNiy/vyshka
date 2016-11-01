@@ -28,12 +28,16 @@ export class ObjectEditor extends BaseVisualComponent<IObjectEditorProps, IObjec
                     <Jumbotron>
                         <h1>Редактор типов</h1>
                         <p>Для редактировани типа перетащите его из дерева справа, или создайте новый</p>
-                        <p><Button bsStyle="primary">Создать новый</Button></p>
+                        <p><Button bsStyle="primary" onClick={() => this.makeNewObject()}>Создать новый</Button></p>
                     </Jumbotron>
                 </Row>
             </Grid>
         );
     };
+
+    makeNewObject() {
+        // let newDataTransfer = new DataTransfer();
+    }
 
     // render() {
     //     return (

@@ -1,14 +1,14 @@
 /// <reference path="../index.d.ts" />
 import React = require("react");
 import {Component} from "react";
-import {IDataFromServer, DataTransfer} from "../../baseDataLogic/DataTransfer";
+import {IDataFromServer, DataTransfer, BaseTypesUnpaced} from "../../baseDataLogic/DataTransfer";
 
 export interface IBaseVisualComponentState {
-    dataTransfer?: DataTransfer;
+    dataTransfer?: DataTransfer ;
 }
 
 export interface IBaseVisualComponentProps {
-    data: IDataFromServer;
+    dataTransfer: DataTransfer;
     key: string;
 }
 
@@ -16,8 +16,8 @@ export abstract class BaseVisualComponent<P extends IBaseVisualComponentProps, S
     constructor(props: P) {
         super(props as P);
         this.state = {} as S;
-        if (props.data) {
-            this.state.dataTransfer = new DataTransfer(props.data);
+        if (props.dataTransfer) {
+            this.state.dataTransfer = props.dataTransfer;
         }
     }
 
@@ -36,16 +36,30 @@ export abstract class BaseVisualComponent<P extends IBaseVisualComponentProps, S
         return this.loadingComponentWait();
     }
 
-    getVal(ident: string, notArr?: boolean) {
-        return this.state.dataTransfer.value(ident, notArr);
+    getComponent(DT: DataTransfer) {
+        return DataTransfer.getCommponent(DT.jsIdent);
     }
 
-    protected set(ident: string, value: any[]) {
-        let DT = this.state.dataTransfer.set(ident, value);
+    getVal(ident: string) {
+        return this.state.dataTransfer.value(ident);
+    }
+
+    protected set(ident: string, value: BaseTypesUnpaced) {
+        let DT = this.DT.set(ident, value);
         this.setState({dataTransfer: DT} as any); //Хуйня какая то в TS с generic
     }
 
-    protected get fromServer(): DataTransfer {
+    protected get DT(): DataTransfer {
         return this.state.dataTransfer;
+    }
+
+    renderGroup(ident: string): Array<React.ReactElement<any>> {
+        let group = this.DT.getGroup(ident);
+        return group.map((dataTr, index) => {
+            let Control = this.getComponent(dataTr);
+            return (
+                <Control dataTransfer={dataTr} key={index}/>
+            );
+        });
     }
 }

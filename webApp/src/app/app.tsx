@@ -10,6 +10,7 @@ import {Header} from "../components/Header/Header";
 import {LeftSidebar} from "../components/LeftSidebar/LeftSidebar";
 import {ActivityPanel} from "../components/ActivityPanel/ActivityPanel";
 import {AppRoute} from "./appRoute";
+import {Notificator} from "./Notificator";
 
 export class App extends Component<{}, {}> {
     // render() {
@@ -35,6 +36,7 @@ export class App extends Component<{}, {}> {
                     </div>
                     <ActivityPanel/>
                 </div>
+                <Notificator/>
             </div>
         );
     }

@@ -19,26 +19,11 @@ export interface IRowControlProps extends IBaseVisualComponentProps {
 export class RowControl extends BaseVisualComponent<IRowControlProps, IRowControlState> {
 
     protected renderComponent() {
-        let Control = this.ColComponent;
-        let cols = this.cols.value;
         return (
             <Row className="row-conttol">
-                {cols.map((row, index) => {
-                    return (
-                        <Control data={row} key={index}/>
-                    );
-                })
-                }
+                {this.renderGroup("cols")}
             </Row>
         );
-    }
-
-    get cols() {
-        return this.state.dataTransfer.type["cols"];
-    }
-
-    get ColComponent() {
-        return DataTransfer.getCommponent(this.cols.jsIdent);
     }
 }
 

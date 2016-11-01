@@ -4,6 +4,7 @@
     "bluebird": "registry:npm/bluebird#3.4.1+20160909132857",
     "body-parser": "registry:npm/body-parser#1.15.2+20160815132839",
     "debug": "registry:npm/debug#2.0.0+20160723033700",
+    "immutable": "registry:npm/immutable#3.7.6+20160411060006",
     "mime": "registry:npm/mime#1.3.0+20160723033700",
     "serve-static": "registry:npm/serve-static#1.11.1+20160810053450"
   },
@@ -17,8 +18,7 @@
   "globalDependencies": {
     "jquery": "registry:dt/jquery#1.10.0+20160929162922",
     "openlayers": "registry:dt/openlayers#3.18.2+20161007170240",
-    "react-bootstrap-table": "registry:dt/react-bootstrap-table#2.3.0+20160930122050"
-    "openlayers": "registry:dt/openlayers#3.18.2+20161007170240"
+    "react-bootstrap-table": "registry:dt/react-bootstrap-table#2.3.0+20160930122050",
     "require": "registry:dt/require#2.1.20+20160919185614"
   }
 }

@@ -1,10 +1,7 @@
 /// <reference path="../index.d.ts" />
 import React = require("react");
-import {FormGroup, InputGroup, FormControl} from "react-bootstrap";
-// let ControlLabel = require("~");
-import {IDataFromServer, DataTransfer} from "../../baseDataLogic/DataTransfer";
 import {
-    BaseVisualComponent, IBaseVisualComponentProps,
+    IBaseVisualComponentProps,
     IBaseVisualComponentState
 } from "../BaseVisualComponent/BaseVisualComponent";
 import {
@@ -20,7 +17,8 @@ export interface ITextControlProps extends IBaseVisualComponentProps {
 
 export class TextControl extends AbstractInputComponent<ITextControlProps, ITextControlState> {
     protected lable(): React.ReactElement<any> {
-        return <span>Текстовый контрол</span>;
+        let name = this.DT.value("name") || "Текстовый контрол";
+        return <span>{name}</span>;
     }
 
     protected type(): typeInputComponent {

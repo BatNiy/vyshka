@@ -1,6 +1,7 @@
 import {ComponentClass} from "react";
 import {Component} from "react";
 import {IBaseVisualComponentProps} from "../components/BaseVisualComponent/BaseVisualComponent";
+import {gruopsElements} from "./rules";
 export interface StringMap<T> {
     [ident: string]: T;
 }
@@ -13,12 +14,15 @@ export interface IDataToServer extends ICommonData {
 
 export type BaseTypesIdents = "string" | "int" | "float" | "VisualComponent" ;
 
-export type BaseTypes = string | number | IDataFromServer;
-
+export type _BaseTypes = string | number ;
+export type BaseTypes = _BaseTypes | IDataFromServer;
+export type BaseTypesUnpaced = _BaseTypes | DataTransfer;
 export interface ICommonData {
     uuid?: string;
     type: StringMap<ITypeInfo>;
     typeIdent: string;
+    jsIdent: string;
+    parentObjUUID?: string;
 }
 
 export interface IDataFromServer extends ICommonData {
@@ -29,56 +33,89 @@ export interface IDataSever extends IDataFromServer, IDataToServer {
 
 }
 
+export interface ITypeInfoUnpac extends ITypeInfo {
+    value: BaseTypesUnpaced;
+}
 export interface ITypeInfo {
-    jsIdent?: string;
     baseType: BaseTypesIdents;
-    value: Array<BaseTypes>;
-    multi?: boolean;
+    value: BaseTypes;
+    group?: gruopsElements;
 }
 
 export class DataTransfer implements IDataSever {
-    type: StringMap<ITypeInfo>;
+    thisDataTransfer: boolean = true;
+    VisualComponentMapByGroup: StringMap<DataTransfer[]> = {};
+    VisualComponentArray: DataTransfer[] = [];
+    type: StringMap<ITypeInfoUnpac>;
     uuid: string;
     typeIdent: string;
     jsIdent: string;
-    updated: boolean;
-    delete: boolean;
+    readOnly: boolean;
+    updated: boolean = false;
+    delete: boolean = false;
 
     static controlReq = (require as any).context("../components", true, / *\.ts/);
+
+    toString(): string {
+        return JSON.stringify(this, null, '\t');
+    }
+
+    toJSON() {
+        let temp = {};
+        $.map(this, (field, fieldName) => {
+            if (typeof field !== "function") {
+                if (fieldName !== "thisDataTransfer" && fieldName !== "VisualComponentMapByGroup" && fieldName !== "VisualComponentArray") {
+                    temp[fieldName] = field;
+                }
+            }
+        });
+        return temp;
+    }
 
     constructor(date: IDataFromServer) {
         $.map(date, (value, ident) => {
             this[ident] = value;
         });
+        this.unpackStructure(date);
+        this.sortGroups();
+    }
+
+    unpackStructure(data: IDataFromServer) {
+        $.map(data.type, (field, fieldName) => {
+            if (field.baseType === "VisualComponent") {
+                field.value = new DataTransfer(field.value);
+                if (field.group) {
+                    if (!this.VisualComponentMapByGroup[field.group]) {
+                        this.VisualComponentMapByGroup[field.group] = [];
+                    }
+                    this.VisualComponentMapByGroup[field.group].push(field.value);
+                }
+                this.VisualComponentArray.push(field.value);
+            }
+        });
+    }
+
+    sortGroups() {
+        let tempStrMap: StringMap<Array<DataTransfer>> = {};
+        $.map(this.VisualComponentMapByGroup, (elements: Array<DataTransfer>, indexOrKey: string) => {
+            tempStrMap[indexOrKey] = elements.sort((a, b) => a.ord - b.ord);
+        });
+        this.VisualComponentMapByGroup = tempStrMap;
+    }
+
+    getGroup(ident: string): Array<DataTransfer> {
+        return this.VisualComponentMapByGroup[ident] || [];
     }
 
     static pathToComponents(ident: string): string {
         return `./${ident}/${ident}.tsx`;
     }
 
-    public getVisualComponents(sort?: boolean, divide?: boolean): Array<ITypeInfo> {
-        let out: Array<ITypeInfo> = [];
-        $.map(this.type, (type) => {
-            if (type.baseType === "VisualComponent") {
-                if (divide) {
-                    type.value.forEach((val) => {
-                        let tempType: ITypeInfo = {
-                            value: [val],
-                            baseType: type.baseType,
-                            jsIdent: type.jsIdent,
-                            multi: false
-                        };
-                        out.push(tempType);
-                    });
-                } else {
-                    out.push(type);
-                }
-            }
-        });
+    public getVisualComponents(sort?: boolean): Array<DataTransfer> {
         if (sort) {
-            out.sort((elem1, elem2) => DataTransfer.getOrd((elem1.value[0] as IDataFromServer)) - DataTransfer.getOrd((elem2.value[0] as IDataFromServer)));
+            return this.VisualComponentArray.sort((elem1, elem2) => elem1.ord - elem2.ord);
         }
-        return out;
+        return this.VisualComponentArray;
     }
 
     public static getCommponent(ident: string): ComponentClass<IBaseVisualComponentProps> {
@@ -92,28 +129,22 @@ export class DataTransfer implements IDataSever {
         return out;
     }
 
-    public value(ident: string, asArray?: boolean): Array<BaseTypes> | BaseTypes {
-        if (asArray) {
-            return this.type[ident].value;
-        }
-        if (this.type[ident].multi) {
-            return this.type[ident].value;
-        } else {
-            return this.type[ident].value[0];
-        }
+    public value(ident: string): BaseTypesUnpaced {
+        return this.type[ident] && this.type[ident].value;
     }
 
-    public set(idnet: string, value: Array<any>) {
+    public set(idnet: string, value: BaseTypesUnpaced) {
         this.type[idnet].value = value;
+        this.updated = true;
         return this;
     };
 
-    get ord() {
-        return this.value("ord", true);
+    get ord(): number {
+        return parseInt(this.value("ord") as string) || 0;
     }
 
     public static getOrd(elem: IDataFromServer): number {
-        return elem.type["ord"] && elem.type["ord"].value[0] as number || 0;
+        return elem.type["ord"] && elem.type["ord"].value as number || 0;
     }
 }
 

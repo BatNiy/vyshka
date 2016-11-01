@@ -20,31 +20,16 @@ export class ColControl extends BaseVisualComponent<IColControlProps, IColContro
 
     protected renderComponent() {
         let colWidth = this.width;
-        let children = this.visualComponents;
         return (
             <Col md={colWidth} xs={12} className="col-control">
-                {children.map((child, key) => {
-                    let Control = DataTransfer.getCommponent(child.jsIdent);
-                    return (
-                        <Control data={child.value[0]} key={key}/>
-                    );
-                })
-                }
+                {this.renderGroup("attrs")}
             </Col>
         );
     }
 
     get width() {
-        return this.state.dataTransfer.value("width");
+        return this.DT.value("width") || 12;
     }
-
-    get visualComponents() {
-        return this.state.dataTransfer.getVisualComponents(true);
-    }
-
-    // get ColComponent() {
-    //     return DataTransfer.getCommponent(this.cols.jsIdent);
-    // }
 }
 
 export {ColControl as Control}

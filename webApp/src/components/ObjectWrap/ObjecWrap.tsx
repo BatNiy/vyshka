@@ -1,6 +1,6 @@
 /// <reference path="../index.d.ts" />
 import React = require("react");
-import {Grid} from "react-bootstrap";
+import {Grid, Row, Jumbotron} from "react-bootstrap";
 import {IDataFromServer, DataTransfer} from "../../baseDataLogic/DataTransfer";
 import {
     BaseVisualComponent, IBaseVisualComponentProps,
@@ -8,9 +8,12 @@ import {
 } from "../BaseVisualComponent/BaseVisualComponent";
 import PubSub = require('pubsub-js');
 import {IActonList} from "../LeftSidebar/LeftSidebar";
+import {SysApi} from "../../baseDataLogic/SysApi";
+import {Notificator} from "../../app/Notificator";
 
 
 export interface IObjecWrapState extends IBaseVisualComponentState {
+    showFalse?: boolean;
 }
 
 export interface IObjecWrapProps extends IBaseVisualComponentProps {
@@ -22,24 +25,26 @@ export interface IObjecWrapProps extends IBaseVisualComponentProps {
 export class ObjectWrap extends BaseVisualComponent<IObjecWrapProps, IObjecWrapState> {
 
     protected renderComponent() {
-        let Control = this.RowComponent;
-        let rows = this.rows.value;
-        return (
-            <Grid fluid={true} className={this.rootMod && "gridIn" || ""}>
-                {rows.map((row, index) => {
-                    return (
-                        <Control data={row} key={index}/>
-                    );
-                })
-                }
-            </Grid>
-        );
+        if (!this.state.showFalse) {
+            return (
+                <Grid fluid={true} className={this.rootMod && "gridIn" || ""}>
+                    {this.renderGroup("rows")}
+                </Grid>
+            );
+        }else {
+            return (<Grid fluid={true} className="gridIn">
+                <Row>
+                    <Jumbotron>
+                        <h1>Объект не найден</h1>
+                    </Jumbotron>
+                </Row>
+            </Grid>);
+        }
     }
 
     componentDidMount() {
         if (this.rootMod) {
             this.loadData(this.props.params.uuid);
-            PubSub.publish<IActonList>("sidebar.addBtnList", this.actionList);
         }
     }
 
@@ -67,83 +72,27 @@ export class ObjectWrap extends BaseVisualComponent<IObjecWrapProps, IObjecWrapS
     }
 
     saveObject() {
-        console.log("типо сохранил");
+        SysApi.saveObject(this.DT).then(() => {
+            Notificator.success("Изменения сохранены");
+        });
     }
 
     loadData(uuid: string) {
-        console.log("Типо загрузил объект " + uuid);
-
-        let attr: IDataFromServer = {
-            typeIdent: "ТипДляБека",
-            uuid: uuid + "drugoiCol",
-            readOnly: false,
-            type: {
-                value: {
-                    baseType: "string",
-                    value: ["Ваня"],
-                }
+        SysApi.loadObject(uuid).then((obj) => {
+            let dataTr: DataTransfer = new DataTransfer(obj);
+            this.setState({dataTransfer: dataTr});
+            if (!dataTr.readOnly) {
+                PubSub.publish<IActonList>("sidebar.addBtnList", this.actionList);
             }
-        };
-
-        let col6: IDataFromServer = {
-            typeIdent: "ТипДляБека",
-            uuid: uuid + "drugoiCol",
-            readOnly: false,
-            type: {
-                width: {
-                    baseType: "int",
-                    value: [6]
-                },
-                NashPerviAtriboot: {
-                    baseType: "VisualComponent",
-                    jsIdent: "TextControl",
-                    value: [attr]
-                },
-                NashPerviAtriboot2: {
-                    baseType: "VisualComponent",
-                    jsIdent: "TextControl",
-                    value: [attr]
-                }
-            }
-        };
-
-        let dataRow: IDataFromServer = {
-            typeIdent: "ТипДляБека",
-            uuid: uuid + "drugoiRow",
-            readOnly: false,
-            type: {
-                cols: {
-                    baseType: "VisualComponent",
-                    jsIdent: "ColControl",
-                    value: [col6, col6],
-                    multi: true
-                }
-            },
-        };
-
-        let data: IDataFromServer = {
-            typeIdent: "ТипДляБека",
-            uuid: uuid,
-            readOnly: false,
-            type: {
-                Row: {
-                    baseType: "VisualComponent",
-                    jsIdent: "RowControl",
-                    value: [dataRow, dataRow],
-                    multi: true
-                }
-            },
-        };
-        let dataTr: DataTransfer = new DataTransfer(data);
-        this.setState({dataTransfer: dataTr});
+        }).catch(() => {
+            console.log("yt yfqlty");
+            Notificator.error("бъект не найден");
+            this.setState({dataTransfer: true as any, showFalse: true});
+        });
     }
 
     get rows() {
-        return this.state.dataTransfer.type["Row"];
-    }
-
-    get RowComponent() {
-        return DataTransfer.getCommponent(this.rows.jsIdent);
+        return this.DT.getGroup("rows");
     }
 
     get rootMod(): boolean {

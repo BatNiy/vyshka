@@ -1,4 +1,7 @@
 import {StringMap} from "./DataTransfer";
+
+export type gruopsElements = "rows" | "cols" | "attrs" | string ;
+
 export class Rules {
     public static LoadRules() {
         //TODO топо потом будут храниться на сервере

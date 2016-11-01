@@ -3,6 +3,8 @@ import React = require("react");
 import PubSub = require("pubsub-js");
 import {Component} from "react";
 import "./LeftSideBar.less";
+import {SysApi} from "../../baseDataLogic/SysApi";
+import {IDataFromServer} from "../../baseDataLogic/DataTransfer";
 
 export interface ILeftSidebarProps {
 
@@ -35,6 +37,16 @@ export class LeftSidebar extends Component<ILeftSidebarProps, ILeftSidebarState>
         PubSub.subscribe<string>("sidebar.deleteBtnList", (ident, uuid) => this.deleteActionList(uuid));
     }
 
+    componentDidMount() {
+        SysApi.loadTypesList().then((types: Array<IDataFromServer>) => {
+            let filterCBnoParent = (obj: IDataFromServer) => {};
+            let makeTree = (data: Array<IDataFromServer>, parentUUID?: string): Array<IDataFromServer> => {
+                return [];
+            };
+            let preperData = makeTree(types.filter((type) => !type.parentObjUUID));
+        });
+    }
+
     addActionList(action: IActonList) {
         let actList = this.state.actonList;
         if (actList.every(act => act.uuid !== action.uuid)) {
@@ -43,7 +55,7 @@ export class LeftSidebar extends Component<ILeftSidebarProps, ILeftSidebarState>
         }
     }
 
-    deleteActionList(uuid) {
+    deleteActionList(uuid: string) {
         let actList = this.state.actonList.filter(act => act.uuid !== uuid);
         this.setState({actonList: actList});
     }
@@ -69,6 +81,11 @@ export class LeftSidebar extends Component<ILeftSidebarProps, ILeftSidebarState>
                             </span>
                         );
                     })}
+                </div>
+                <div className="left-sitebar-content">
+                    <div>
+                        Базовый класс
+                    </div>
                 </div>
             </div>
         );
