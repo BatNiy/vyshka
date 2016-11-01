@@ -1,6 +1,7 @@
 import {IThemJSON} from "../app/themLoader";
 import {StringMap, IDataFromServer, IDataToServer, DataTransfer} from "./DataTransfer";
 import {Generator} from "./RandomGenerator";
+import {data1} from "./baseData/comp1";
 
 
 let storage: StringMap<IDataFromServer> = {};
@@ -58,7 +59,7 @@ let dataRow: IDataFromServer = {
 let data: IDataFromServer = {
     typeIdent: "baseType",
     uuid: "baseType",
-    readOnly: true,
+    readOnly: false,
     jsIdent: "ObjecWrap",
     type: {
         Row1: {
@@ -70,6 +71,7 @@ let data: IDataFromServer = {
 };
 
 storage["baseType"] = data;
+storage["1"] = data1;
 storageTypes["baseType"] = data;
 
 let getFromStorage = (uuid: string) => new Promise<IDataFromServer>((resolve, cach) => {

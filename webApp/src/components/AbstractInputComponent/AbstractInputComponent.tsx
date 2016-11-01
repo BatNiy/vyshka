@@ -11,7 +11,7 @@ import {Generator} from "../../baseDataLogic/RandomGenerator";
 
 export type validationState = 'success'| 'warning' | 'error' | '';
 export type bsSize = "lg" | "large" | "sm" | "small" | '';
-export type typeInputComponent = 'text'| 'email';
+export type typeInputComponent = 'text'| 'email' | "number" | string;
 
 export interface IAbstractInputComponentState extends IBaseVisualComponentState {
 }
@@ -65,7 +65,7 @@ export abstract class AbstractInputComponent<P extends IAbstractInputComponentPr
                 <label htmlFor={this.id} className="control-label">{this.lable()}</label>
                 <InputGroup>
                     {this.before()}
-                    <FormControl type="text" placeholder={this.placeholder()} value={this.value()}
+                    <FormControl type={this.type()} placeholder={this.placeholder()} value={this.value()}
                                  onChange={(e: Event) => this.handleChange(e)}/>
                     {this.after()}
                 </InputGroup>

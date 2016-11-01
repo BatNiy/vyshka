@@ -20,6 +20,10 @@ export interface IActonList {
     renderList: React.ReactElement<any>[];
 }
 
+export interface IDataFromServerTree extends IDataFromServer {
+    children?: IDataFromServer[];
+}
+
 export class LeftSidebar extends Component<ILeftSidebarProps, ILeftSidebarState> {
 
     constructor(props: ILeftSidebarProps) {
@@ -38,13 +42,20 @@ export class LeftSidebar extends Component<ILeftSidebarProps, ILeftSidebarState>
     }
 
     componentDidMount() {
-        SysApi.loadTypesList().then((types: Array<IDataFromServer>) => {
-            let filterCBnoParent = (obj: IDataFromServer) => {};
-            let makeTree = (data: Array<IDataFromServer>, parentUUID?: string): Array<IDataFromServer> => {
-                return [];
-            };
-            let preperData = makeTree(types.filter((type) => !type.parentObjUUID));
-        });
+        // SysApi.loadTypesList().then((types: Array<IDataFromServer>) => {
+        //     let filterCBnoParent = (obj: IDataFromServer) => {
+        //     };
+        //     let makeTree = (data: IDataFromServer): IDataFromServerTree[] => {
+        //         return types.filter((type: IDataFromServer) => type.parentObjUUID === data.parentObjUUID).map((type: IDataFromServerTree) => {
+        //             type.children = makeTree(type);
+        //             return type;
+        //         });
+        //     };
+        //     let preperData: IDataFromServerTree[] = types.filter((type: IDataFromServer) => !type.parentObjUUID).map((type: IDataFromServerTree) => {
+        //         type.children = makeTree(type);
+        //         return type;
+        //     });
+        // });
     }
 
     addActionList(action: IActonList) {
