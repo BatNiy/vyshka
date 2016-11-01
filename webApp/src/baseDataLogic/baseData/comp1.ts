@@ -235,6 +235,99 @@ let col3_1: IDataFromServer = {
     }
 };
 
+let col3_2: IDataFromServer = {
+    typeIdent: "Col",
+    uuid: Generator.UUID(),
+    readOnly: false,
+    jsIdent: "ColControl",
+    type: {
+        width: {
+            baseType: "int",
+            value: 6
+        },
+        Header: {
+            baseType: "VisualComponent",
+            value: {
+                jsIdent: "TextControlHeader",
+                typeIdent: "AttrName",
+                uuid: Generator.UUID(),
+                readOnly: false,
+                type: {
+                    value: {
+                        baseType: "string",
+                        value: "Е312"
+                    },
+                    name: {
+                        baseType: "string",
+                        value: "Трансформатор"
+                    }
+                }
+            },
+            group: "attrs"
+        },
+        u1: {
+            baseType: "VisualComponent",
+            value: {
+                jsIdent: "TextControl",
+                typeIdent: "AttrName",
+                uuid: Generator.UUID(),
+                readOnly: false,
+                type: {
+                    value: {
+                        baseType: "string",
+                        value: "105"
+                    },
+                    name: {
+                        baseType: "string",
+                        value: "Входное напряжение"
+                    }
+                }
+            },
+            group: "attrs"
+        },
+        Header2: {
+            baseType: "VisualComponent",
+            value: {
+                jsIdent: "TextControlHeader",
+                typeIdent: "AttrName",
+                uuid: Generator.UUID(),
+                readOnly: false,
+                type: {
+                    value: {
+                        baseType: "string",
+                        value: "ПЭД-4000"
+                    },
+                    name: {
+                        baseType: "string",
+                        value: "Двигатель"
+                    }
+                }
+            },
+            group: "attrs"
+        },
+        u12312: {
+            baseType: "VisualComponent",
+            value: {
+                jsIdent: "TextControl",
+                typeIdent: "AttrName",
+                uuid: Generator.UUID(),
+                readOnly: false,
+                type: {
+                    value: {
+                        baseType: "string",
+                        value: "0%"
+                    },
+                    name: {
+                        baseType: "string",
+                        value: "Загрузка двигателя"
+                    }
+                }
+            },
+            group: "attrs"
+        }
+    }
+};
+
 let dataRow3: IDataFromServer = {
     typeIdent: "Row",
     uuid: Generator.UUID(),
@@ -244,6 +337,11 @@ let dataRow3: IDataFromServer = {
         col3: {
             baseType: "VisualComponent",
             value: col3_1,
+            group: "cols"
+        },
+        col3_2: {
+            baseType: "VisualComponent",
+            value: col3_2,
             group: "cols"
         }
     },
