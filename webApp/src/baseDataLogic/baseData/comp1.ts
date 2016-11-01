@@ -168,7 +168,7 @@ let dataRow2: IDataFromServer = {
     },
 };
 
-let col3: IDataFromServer = {
+let col3_1: IDataFromServer = {
     typeIdent: "Col",
     uuid: Generator.UUID(),
     readOnly: false,
@@ -189,6 +189,14 @@ let col3: IDataFromServer = {
                     name: {
                         baseType: 'string',
                         value: "Местонахождение"
+                    },
+                    lat: {
+                        baseType: "float",
+                        value: 55.7522200
+                    },
+                    lon: {
+                        baseType: "float",
+                        value: 37.6155600
                     }
                 }
             },
@@ -205,7 +213,7 @@ let dataRow3: IDataFromServer = {
     type: {
         col3: {
             baseType: "VisualComponent",
-            value: col3,
+            value: col3_1,
             group: "cols"
         }
     },
